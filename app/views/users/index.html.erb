@@ -1,0 +1,5 @@
+<% for user in @users %>
+  <p><%= user.username %> | 
+  <%= user.email %> | 
+  <%= link_to "Show", user %></p>
+<% end %>

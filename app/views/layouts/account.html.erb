@@ -1,0 +1,23 @@
+<% title "Account settings" %>
+
+<% content_for :content do %>
+  <div id="col1">
+    <%= yield %>
+  </div>
+  <div id="col2">
+  	<%= image_tag avatar_url(@user, 240) %>
+  	<% if request.path == edit_user_path(current_user) %>
+  	  <p class="gravatar-link"><%= link_to 'Change your avatar at Gravatar.com', "http://gravatar.com/"  %></p>
+  	<% end %>
+  	<p class="username"><%= @user.username %></p>
+  	<p class="entry"><%= @user.fullname %></p>
+	<p class="entry"><%= @user.public_email %></p>
+	<p class="entry"><%= @user.url %></p>
+	<p class="entry"><%= @user.institution %></p>
+	<p class="entry"><%= @user.location %></p>
+	<p class="joined-on"><span>Joined on </span><%= @user.created_at.strftime("%b %d, %Y") %><p>
+	<p>Following/Followers</p>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

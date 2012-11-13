@@ -1,0 +1,227 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #3D3D3D;
+	line-height: 20pt;
+	font-size: 11pt;
+}
+
+body,input {
+	font-family: "Open Sans", sans-serif;
+}
+
+.clearfix {
+	clear: both;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#wrapper {
+	overflow: hidden;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0;
+	margin-bottom: -362px;
+}
+
+.container {
+	margin: 0 auto;
+	width: 980px;
+}
+
+
+#header {
+	height: 75px;
+	background: #F1F1F1;
+	border-bottom: 1px solid #CACACA;
+}
+	#logo {
+		float: left;
+		position: relative;
+		width: 70px;
+		padding: 20px 0 0 0;
+	}
+		#logo img {
+			height: 40px;
+		}
+	
+	#topsearch {
+		float: left;
+		padding: 20px 20px 10px 20px;
+		margin-left: 10px;
+		position: relative;
+		width: auto;
+	}
+		#topsearch input.search_button {
+			background: #FABC00;
+			background: -moz-linear-gradient(#FABC00, #FF8400);
+			background: -webkit-linear-gradient(#FABC00, #FF8400);
+			background: linear-gradient(#FABC00, #FF8400);
+			padding: 7px 35px;
+			border-radius: 3px;
+			border: solid 1px #C8C9C9;
+			margin: 0 0 0 10px;
+			height: 20px;
+		}
+		#topsearch input.search_button:hover {
+			background: #3fa9f5;
+		}
+		#topsearch input {
+			float: left;
+			font-size: 14pt;
+			padding: 5px 10px;
+			border: solid 1px #C8C9C9;
+		}
+	
+	#not_signed_in {
+		float: right;
+		padding: 20px 0 10px 20px;
+		position: relative;
+	}
+		.topnav {
+			float: left;
+			margin: 0;
+			list-style: none;
+			line-height: 26px;
+		}
+			.topnav li {
+				margin-left: 20px;
+				float: left;
+				position: relative;
+			}
+			.topnav li.first a {
+				color: #3fa9f5;
+				font-size: 11pt;
+				padding-right: 20px;
+			}
+			.topnav a {
+				font-weight: bold;
+				font-size: 10pt;
+				color: #666666;
+			}
+	
+	#userbox {
+		float: right;
+		padding: 7px 0;
+	}
+		#user {
+			float: left;
+			padding: 10px 0 0 0;
+		}
+			#user:hover {
+				opacity: 0.7;
+			}
+			#user img {
+				height: 40px;
+			}
+			#user .name {
+				float: left;
+				margin: 10px 10px 0 10px;
+				padding: 0;
+				max-width: 120px;
+			}
+			#user a {
+				font-size: 10pt;
+				font-weight: bold;
+				color: #666666;
+			}
+			#user a:hover {
+				text-decoration: none;
+			}
+
+		#user-links {
+			background: #FAFAFA;
+			background: -moz-linear-gradient(#FAFAFA, #E0E0E0);
+			background: -webkit-linear-gradient(#FAFAFA, #E0E0E0);
+			background: linear-gradient(#FAFAFA, #E0E0E0);
+			float: left;
+			margin: 2px 0 0 20px;
+			padding: 0;
+			border: 1px solid #DDD;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 #FAFAFA, inset 0 1px 0 #FAFAFA;
+			list-style: none;
+		}
+			#user-links li {
+				position: relative;
+				float: left;
+				padding: 10px 10px 0 10px;
+			}
+			#user-links img {
+				height: 35px;
+			}
+
+
+#site {
+	clear: both;
+	padding: 0;
+	width: 100%;
+}
+	#notice {
+		float: left;
+		padding: 10px 0;
+	}
+		#flash_notice {
+			color: green;
+			font-weight: bold;
+		}
+	
+	#content {
+		float: left;
+		margin: 40px 0;
+	}
+
+#footer {
+	color: #636363;
+	margin: 0;
+	font-size: 10pt;
+	clear: both;
+}
+	.upper-footer {
+		min-height: 140px;
+		overflow: hidden;
+		border-top: 1px solid #E0E0E0;
+		border-bottom: 1px solid #E0E0E0;
+		box-shadow: inset 0 -1px 0 white;
+		background-color: #F8F8F8;
+		padding: 20px 0;
+	}
+	
+	.lower-footer {
+		min-height: 80px;
+		position: relative;
+		overflow: hidden;
+		padding: 20px 0;
+	}
+		#legal {
+			float: right;
+			width: 350px;
+			height: 60px;
+			line-height: 8px;
+			margin-right: 15px;
+			background: url() 0 5px no-repeat;
+		}

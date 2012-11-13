@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  type: 
+  comment: MyText
+  metaclass: false
+
+two:
+  name: MyString
+  type: 
+  comment: MyText
+  metaclass: false

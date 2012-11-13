@@ -1,0 +1,6 @@
+<div class="field">
+  <%= f.label :user_id %> <%= f.collection_select :user_id, User.all, :id, :username %>
+  <small><%= f.link_to_remove "Remove this member" %></small><br />
+  <%= f.label :role_id %> <%= f.select :role_id, Membership::ROLES %>
+  
+</div>

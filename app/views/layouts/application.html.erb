@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      <%= content_for?(:title) ? yield(:title) : "Untitled" %> - Eywa, documentation and collaboration for archaeologists
+    </title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <div class="container">
+          <div id="logo">
+            <%= link_to image_tag("logo-v1.png", :mouseover => image_path("logo-v1-hover.png")), root_url %>
+          </div>
+          <% if logged_in? %>
+            <div id="topsearch">
+              <%= search_field_tag :search, '', :size => 40 %>
+              <%= image_submit_tag(("search_button.png"), :class => "search_button") %>
+            </div>
+            <div id="userbox">
+              <div id="user">
+                <div class="name"><%= link_to "#{current_user.fullname}", user_path(current_user) %></div>
+                <%= link_to image_tag(avatar_url(current_user, 40)), user_path(current_user) %>
+              </div>
+              <ul id="user-links">
+                <li><%= link_to image_tag("add_project.png", :alt => "Add Project"), new_project_path %></li>
+                <li><%= link_to image_tag("edit_settings.png", :alt => "Edit Settings"), edit_user_path(current_user) %></li>
+                <li><%= link_to image_tag("log_out.png", :alt => "Log out"), logout_path %></li>
+              </ul>
+            </div>
+          <% else %>
+            <div id="not_signed_in">
+              <ul class="topnav">
+                <li class='first'><%= link_to "Sign up", signup_path %></li>
+                <li><%= link_to "Explore" %></li>
+                <li><%= link_to "Log in", login_path %> </li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="site">
+        <div class="container">
+          <div id="notice">
+            <% flash.each do |name, msg| %>
+              <%= content_tag :div, msg, :id => "flash_#{name}" %>
+            <% end %>
+          </div>
+          <div id="content">
+            <%= content_for?(:content) ? yield(:content) : yield %>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer">
+        <div class="upper-footer">
+          <div class="container">
+            <p>Hier kommen von der Blog und Hilfeseite freigegebene Beiträge hin. In Kategorien. Max 7 pro Kategorie, max 3 Kategorien und Standartlinks</p>
+          </div>
+        </div>
+        <div class="lower-footer">
+          <div class="container">
+            <div id="legal">
+              <p>Footer unten</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

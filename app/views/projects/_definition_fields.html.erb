@@ -1,0 +1,21 @@
+<div class="field">
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %> <small><%= f.link_to_remove "Remove this definition" %></small>
+  </p>
+  <p>
+    <%= f.label :predicate %><br />
+    <%= f.text_field :predicate %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment, :size => "40x5" %>
+  </p>
+  <p>
+    <%= f.label :metaclass %> <%= f.check_box :metaclass %>
+  </p>
+</div>

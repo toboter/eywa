@@ -1,0 +1,43 @@
+<% title "Project" %>
+
+<p>
+  <small>
+    <%= link_to "Edit", edit_project_path(@project) %> |
+    <%= link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete %>
+  </small>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+<p>
+  <strong>Shortcut:</strong>
+  <%= @project.shortcut %>
+</p>
+<p>
+  <strong>Description:</strong>
+  Eine kurze Beschreibung des Projects
+</p>
+<p>
+  <strong>Subject:</strong>
+  Die Kategorie: Excavation, Stratigrafie, Philology, Archaeology
+</p>
+<p>
+  <strong>Created by </strong>
+  <%= User.find(@project.creator_id).username %>. <strong>Last updated by </strong><%= User.find(@project.updater_id).username %>.
+</p>
+
+<h4>Members</h4>
+<ul>
+  <% for membership in @project.memberships %>
+    <li><%= link_to "#{membership.user.username}", user_path(membership.user) %> as a <%= membership.role_id %></li>
+  <% end %>
+</ul>
+<h4>Definitions</h4>
+<ul>
+  <% for definition in @project.definitions %>
+    <li><%= link_to "#{definition.name}", definition_path(definition) %></li>
+  <% end %>
+</ul>
+<p>
+  <%= link_to "View All", projects_path %>
+</p>

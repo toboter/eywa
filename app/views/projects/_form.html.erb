@@ -1,0 +1,25 @@
+<%= nested_form_for @project do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :shortcut %><br />
+    <%= f.text_field :shortcut %>
+  </p>
+
+  <h4>Add members</h4>
+  <%= f.fields_for :memberships do |builder| %>
+    <%= render "membership_fields", :f => builder %>
+  <% end %>
+  <p><%= f.link_to_add "Add a Member", :memberships %></p>
+
+  <h4>Add definitions</h4>
+  <%= f.fields_for :definitions do |builder| %>
+    <%= render "definition_fields", :f => builder %>
+  <% end %>
+  <p><%= f.link_to_add "Add a Definition", :definitions %></p>
+
+  <p><%= f.submit %></p>
+<% end %>

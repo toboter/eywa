@@ -1,0 +1,6 @@
+<% title 'Dashboard' %>
+
+<% if logged_in? %>
+  <p><%= link_to 'Your Profile', user_path(current_user) %></p>
+<% end %>
+<p><%= link_to 'Projects', projects_path %></p>

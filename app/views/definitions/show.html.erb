@@ -1,0 +1,20 @@
+<% title "Definition" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @definition.name %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @definition.predicate %> | <%= @definition.content %>
+</p>
+<p>
+  <strong>Comment:</strong>
+  <%= @definition.comment %>
+</p>
+<p>
+  <strong>Metaclass:</strong>
+  <%= @definition.metaclass %>
+</p>
+
+<p><%= link_to 'Back to Project', project_path(@definition.project) %></p>
