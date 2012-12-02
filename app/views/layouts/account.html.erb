@@ -1,22 +1,32 @@
-<% title "Account settings" %>
+<% title "#{@account.username}" %>
 
 <% content_for :content do %>
-  <div id="col1">
-    <%= yield %>
-  </div>
-  <div id="col2">
-  	<%= image_tag avatar_url(@user, 240) %>
-  	<% if request.path == edit_user_path(current_user) %>
-  	  <p class="gravatar-link"><%= link_to 'Change your avatar at Gravatar.com', "http://gravatar.com/"  %></p>
-  	<% end %>
-  	<p class="username"><%= @user.username %></p>
-  	<p class="entry"><%= @user.fullname %></p>
-	<p class="entry"><%= @user.public_email %></p>
-	<p class="entry"><%= @user.url %></p>
-	<p class="entry"><%= @user.institution %></p>
-	<p class="entry"><%= @user.location %></p>
-	<p class="joined-on"><span>Joined on </span><%= @user.created_at.strftime("%b %d, %Y") %><p>
-	<p>Following/Followers</p>
+  <div id="account">
+    <div class="col1">
+      <%= yield %>
+    </div>
+    <div class="col2">
+  	  <%= image_tag avatar_url(@account, 240), :class => "avatar" %>
+      <div class="personalbox">
+  	    <% if request.path == edit_current_user_path %>
+  	      <p class="gravatar-link"><%= link_to 'Change your avatar at Gravatar.com', "http://gravatar.com/"  %></p>
+  	    <% end %>
+  	    <p class="username"><%= @account.username %>
+        <% if @account.type == 'Organisation' %><br />(Organisation)<% end %></p>
+  	    <p class="entry"><%= @account.fullname %></p>
+	      <% if @account.public_email.present? %>
+          <p class="entry">
+            <%= image_tag("mail.png", :alt => "Mail") %>
+            <%= mail_to "#{@account.public_email}", "#{@account.public_email}", :encode => "javascript" %>
+          </p>
+        <% end %>
+	      <p class="entry"><%= image_tag("url.png", :alt => "URL") %><%= link_to "#{@account.url}", @account.url %></p>
+	      <p class="entry"><%= image_tag("institution.png", :alt => "Institution") %><%= @account.institution %></p>
+	      <p class="entry"><%= image_tag("pin.png", :alt => "Location") %><%= @account.location %></p>
+	      <p class="joined-on"><%= image_tag("date.png", :alt => "Date") %><span>Joined on </span><%= @account.created_at.strftime("%b %d, %Y") %><p>
+      </div>
+	  <p>Following/Followers</p>
+    </div>
   </div>
 <% end %>
 

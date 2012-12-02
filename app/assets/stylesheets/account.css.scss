@@ -1,0 +1,116 @@
+#account .col1 {
+	clear: both;
+	float: left;
+	display: inline;
+	width: 700px;
+	padding-right: 30px;
+}
+	#account .col1 a {
+		font-family: Helvetica, arial, freesans, clean, sans-serif;
+		color: #666;
+	}
+	#account .col1 h1,h2,h3,h4 {
+		font-family: Helvetica, arial, freesans, clean, sans-serif;
+		padding-top: 20px;
+	}
+	#account .col1 .tabnav {
+		margin-bottom: 10px;
+	}
+
+	#account .col1 .minibutton img {
+		height: 13px;
+		padding: 4px 5px 0 0;
+	}
+	#account .col1 .minibutton {
+		float: right;
+		color: #555;
+		border: 1px solid #D4D4D4;
+		border-bottom-color: #BCBCBC;
+		background: #f1f1f1;
+		background: -moz-linear-gradient(#f1f1f1, #f9f9f9);
+		background: -webkit-linear-gradient(#f1f1f1, #f9f9f9);
+		background: linear-gradient(#f1f1f1, #f9f9f9);
+		position: relative;
+		display: inline-block;
+		padding: 0 10px 0 10px;
+		font-size: 13px;
+		font-weight: bold;
+		line-height: 24px;
+		white-space: nowrap;
+		border-radius: 3px;
+		}
+	#account .col1 .minibutton:hover {
+		text-decoration: none;
+		background: #3fa9f5;
+	}
+    #account .col1 .project-entry {
+    	padding: 10px 0;
+    	border-bottom: 1px solid #f1f1f1;
+    	margin: 10px 0;
+    }
+    #account .col1 .project-entry .link {
+    	font-size: 16pt;
+    	font-weight: bold;
+    }
+    #account .col1 .project-entry .link .created_at {
+    	font-size: 10pt;
+    	font-weight: normal;
+    	float: right;
+    }
+    #account .col1 .project-entry .link .role-name {
+    	font-size: 10pt;
+    	font-weight: normal;
+    }
+    #account .col1 .project-entry .description {
+    	font-size: 11pt;
+    	line-height: 16pt;
+    }
+
+    #account .panes > div {
+    	
+    }
+
+#account .col2 {
+	float: right;
+	display: inline;
+	width: 250px;
+}
+	#account .col2 .avatar {
+		border: solid 5px white;
+		box-shadow: 0px 0px 0px 1px #D4D5D5, 0px 0px 10px 0px rgba(0,0,0,0.1);
+	}
+	.col2 .personalbox {
+		border: solid 1px #aaaaaa;
+		padding: 10px;
+		margin: -10px 5px 5px 5px;
+		border-radius: 3px;
+		box-shadow: 0px 0px 0px 1px #D4D5D5, 0px 0px 5px 0px rgba(0,0,0,0.1);
+		background: #f9f9f9;
+	}
+	.col2 p.username {
+		font-size: 16pt;
+		font-weight: bold;
+		padding: 10px 0 20px 0;
+		border-bottom: 1px solid #aaaaaa;
+		margin-bottom: 10px;
+	}
+	.col2 p.entry {
+		font-size: 10pt;
+	}
+	.col2 .personalbox img {
+		height: 15px;
+		margin-right: 10px
+	}
+	.col2 p.joined-on {
+		margin-top: 10px;
+		border-top: 1px solid #aaaaaa;
+		padding: 10px 0 10px 
+	}
+	.col2 p.joined-on span {
+		color: #b6b6b6;
+		}
+	.col2 p.gravatar-link {
+		font-size: 9pt;
+		font-weight: bold;
+		}
+

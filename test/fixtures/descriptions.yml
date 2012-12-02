@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  definition_id: 1
+  predicate: MyString
+  content: MyString
+
+two:
+  definition_id: 1
+  predicate: MyString
+  content: MyString

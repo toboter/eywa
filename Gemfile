@@ -5,8 +5,8 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# The Postgresql adapter
 gem 'pg'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -19,6 +19,8 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+
+gem "mocha", :group => :test
 
 gem 'jquery-rails'
 
@@ -37,6 +39,30 @@ gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
 # https://github.com/stefankroes/ancestry
 gem 'ancestry'
 
+# https://github.com/norman/friendly_id
+gem 'friendly_id'
+
+# Um die RDF Property und Class Werte zu erhalten werden die Seiten geladen (vielleicht mit Prefixauswahloption?)
+# http://railscasts.com/episodes/190-screen-scraping-with-nokogiri
+# http://nokogiri.org/tutorials/searching_a_xml_html_document.html
+# gem 'nokogiri', :group => :development # cf. http://nokogiri.org/tutorials/installing_nokogiri.html
+
+# Um die Viewlogik etwas aufzuräumen
+# http://railscasts.com/episodes/286-draper
+# gem 'draper'
+
+# Um Datensätze zusammen mit ihren Definitionen zu kopieren sollte dieses Gem hilfreich sein.
+# http://stackoverflow.com/questions/6711956/activerecord-how-can-i-clone-nested-associations
+# https://github.com/rocksolidwebdesign/amoeba
+# gem 'amoeba'
+
+# Um eine Suche zu bauen
+# http://railscasts.com/episodes/370-ransack
+# gem 'ransack'
+
+
+
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
@@ -48,7 +74,5 @@ gem 'ancestry'
 
 # To use debugger
 # gem 'debugger'
-
-gem "mocha", :group => :test
 
 # http://findicons.com

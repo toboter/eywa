@@ -1,0 +1,11 @@
+<div class="field">
+  <p>
+    <%= f.label :predicate %><br />
+    <%= f.collection_select :predicate, @family_of_property, :definition_name, :definition_name %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.collection_select :content, @family_of_thing, :definition_name, :definition_name %>
+  </p>
+  <small><%= f.link_to_remove "Remove this description" %></small><br />
+</div>

@@ -3,6 +3,6 @@
 <%= render 'form' %>
 
 <p>
-  <%= link_to "Show", @project %> |
-  <%= link_to "View All", projects_path %>
+  <%= link_to "Show", user_project_path(@project.owner, @project) %> |
+  <%= link_to "Explore" %>
 </p>

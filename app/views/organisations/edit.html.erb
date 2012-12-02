@@ -1,0 +1,53 @@
+<% title "Edit Organisation" %>
+<%= form_for @organisation, :url => organisation_path do |f| %>
+  <%= f.error_messages %>
+  <div id="edit">
+    <div id="profile">
+	    <p>
+        <%= f.label :fullname %><br />
+        <%= f.text_field :fullname %>
+      </p>
+      <p>
+        <%= f.label :public_email, "Email (will be public)" %><br />
+        <%= f.text_field :public_email %>
+      </p>
+      <p>
+        <%= f.label :url, "URL" %><br />
+        <%= f.text_field :url %>
+      </p>
+      <p>
+        <%= f.label :institution %><br />
+        <%= f.text_field :institution %>
+      </p>
+      <p>
+        <%= f.label :location %><br />
+        <%= f.text_field :location %>
+      </p>
+      <p>
+        <%= f.label :interests %><br />
+        <%= f.text_area :interests %>
+      </p>
+    </div>
+
+    <div id="settings">
+      <p>
+        <%= f.label :username %><br />
+        <%= f.text_field :username %>
+      </p>
+    </div>
+
+    <div id="emails">
+      <p>
+        <%= f.label :email, "Email Address" %><br />
+    	<%= f.text_field :email %>
+  	  </p>
+  	  <p>Add another email address</p>
+  	</div>
+  	
+    <p><%= f.submit (@organisation.new_record? ? "Create" : "Update") %></p>
+  </div>
+<% end %>
+<p>
+  <%= link_to "Show", account_path(@organisation) %> |
+  <%= link_to "View All", root_path %>
+</p>

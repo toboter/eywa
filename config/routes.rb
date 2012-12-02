@@ -1,16 +1,34 @@
 Eywa::Application.routes.draw do
 
+  resources :fellowships
+  resources :roles, :path => "/admin/roles"
 
-  match 'user/edit' => 'users#edit', :as => :edit_current_user
-  match 'signup' => 'users#new', :as => :signup
-  match 'logout' => 'sessions#destroy', :as => :logout
-  match 'login' => 'sessions#new', :as => :login
+  match 'account/settings' => 'users#edit', :as => :edit_current_user
+  match 'account/signup' => 'users#new', :as => :signup
+  resources :users, :only => [:create, :update]
 
+  match 'organisation/:id/settings' => 'organisations#edit', :as => :edit_organisation
+  match 'organisation/new' => 'organisations#new', :as => :new_organisation
+  resources :organisations, :only => [:create, :update]
+
+  match 'account/logout' => 'sessions#destroy', :as => :logout
+  match 'account/login' => 'sessions#new', :as => :login
   resources :sessions
-  resources :users
 
-  resources :projects
-  resources :definitions, :only => [:show]
+  match 'organisation/leave' => 'sessions#leave', :as => :switch_back
+ 
+  # Remove the controllername in the url
+  # at http://jasoncodes.com/posts/rails-3-nested-resource-slugs
+  resources :accounts, :only => [:show, :destroy], :path => ''
+  resources :accounts, :path => '', :only => [] do 
+    resources :projects, :path => '', :except => [:index] do    
+      resources :definitions # , :contexts, :articles, :wikis , :clones(forks?)
+    end
+  end
+
+# resources :forks, :only => [:new, :create], :path_names => { :new => 'fork' }
+
+
 
   # vgl. http://railscasts.com/episodes/221-subdomains-in-rails-3
   # constraints(Subdomain) do
@@ -64,11 +82,11 @@ Eywa::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'dashboard#index'
-
   # See how all your routes lay out with "rake routes"
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html. 
+  root :to => 'dashboard#index'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

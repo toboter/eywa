@@ -9,11 +9,10 @@
     <tr>
       <td><%= project.name %></td>
       <td><%= project.shortcut %></td>
-      <td><%= link_to "Show", project %></td>
-      <td><%= link_to "Edit", edit_project_path(project) %></td>
-      <td><%= link_to "Destroy", project, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= project.owner.username %></td>
+      <td><%= link_to "Show", user_project_path(project.owner, project) %></td>
+      <td><%= link_to "Edit", edit_user_project_path(project.owner, project) %></td>
+      <td><%= link_to "Destroy", [project.owner, project], :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
-
-<p><%= link_to "New Project", new_project_path %></p>

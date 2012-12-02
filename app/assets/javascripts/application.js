@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery_nested_form
+
+
+$(function() {
+$('#search').focus(function() {
+     $('#search').animate({width: '500px'});
+});
+$('#search').blur(function() {
+     $('#search').animate({width: '400px'});
+});
+});
+
+       
+

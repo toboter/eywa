@@ -1,0 +1,30 @@
+#project .col1 {
+	clear: both;
+	float: left;
+	display: inline;
+	width: 600px;
+	padding-right: 30px;
+}
+
+#project .col2 {
+	float: right;
+	display: inline;
+	width: 350px;
+}
+	#project .col2 li {
+	list-style: none
+	}
+
+.definition {
+	padding-left: 20px;
+	padding-bottom: 10px;
+	background: image-url("bang.png") 0 4px no-repeat;
+	background-size: 15px;
+}
+
+.nested_definitions {
+	margin-left: 25px;
+}
+.nested_definitions .nested_definitions .nested_definitions .nested_definitions .nested_definitions {
+	margin-left: 0px;
+}

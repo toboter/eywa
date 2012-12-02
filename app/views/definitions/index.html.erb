@@ -1,0 +1,9 @@
+<% title "Definitions" %>
+
+<div class="tabs">
+  <p><%= link_to 'Back to project', user_project_path(@project.owner, @project) %></p>
+</div>
+<br />
+
+<%= nested_definitions @arr_definitions %>
+

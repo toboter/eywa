@@ -11,46 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113011054) do
+ActiveRecord::Schema.define(:version => 20121202183127) do
 
-  create_table "definitions", :force => true do |t|
-    t.string   "name"
-    t.string   "predicate"
-    t.string   "content"
-    t.integer  "project_id"
-    t.string   "ancestry"
-    t.text     "comment"
-    t.boolean  "metaclass"
-    t.string   "approved_since_version"
-    t.string   "deprecated_since_version"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-    t.integer  "creator_id"
-    t.integer  "updater_id"
-  end
-
-  add_index "definitions", ["ancestry"], :name => "index_definitions_on_ancestry"
-
-  create_table "memberships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.integer  "role_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "creator_id"
-    t.integer  "updater_id"
-  end
-
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.string   "shortcut"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "creator_id"
-    t.integer  "updater_id"
-  end
-
-  create_table "users", :force => true do |t|
+  create_table "accounts", :force => true do |t|
     t.string   "username"
     t.string   "email"
     t.string   "password_hash"
@@ -63,6 +26,81 @@ ActiveRecord::Schema.define(:version => 20121113011054) do
     t.string   "institution"
     t.string   "location"
     t.text     "interests"
+    t.string   "type"
+    t.boolean  "deactivated"
+  end
+
+  create_table "definitions", :force => true do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.string   "ancestry"
+    t.text     "comment"
+    t.boolean  "metaclass"
+    t.string   "approved_since_version"
+    t.string   "deprecated_since_version"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.string   "content"
+    t.string   "predicate"
+  end
+
+  add_index "definitions", ["ancestry"], :name => "index_definitions_on_ancestry"
+
+  create_table "descriptions", :force => true do |t|
+    t.integer  "definition_id"
+    t.string   "predicate"
+    t.string   "content"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  create_table "fellowships", :force => true do |t|
+    t.integer  "organisation_id"
+    t.integer  "user_id"
+    t.string   "role"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "project_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "shortcut"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.string   "slug"
+    t.text     "description"
+    t.integer  "owner_id"
+    t.boolean  "basic"
+    t.string   "xmlns_url"
+    t.string   "project_url"
+  end
+
+  add_index "projects", ["slug"], :name => "index_projects_on_slug"
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.text     "comment"
+    t.string   "range"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

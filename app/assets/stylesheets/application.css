@@ -55,15 +55,15 @@ a:hover {
 
 
 #header {
-	height: 75px;
+	height: 65px;
 	background: #F1F1F1;
 	border-bottom: 1px solid #CACACA;
 }
 	#logo {
 		float: left;
 		position: relative;
-		width: 70px;
-		padding: 20px 0 0 0;
+		width: 90px;
+		padding: 14px 0 0 0;
 	}
 		#logo img {
 			height: 40px;
@@ -71,7 +71,7 @@ a:hover {
 	
 	#topsearch {
 		float: left;
-		padding: 20px 20px 10px 20px;
+		padding: 15px 20px 10px 20px;
 		margin-left: 10px;
 		position: relative;
 		width: auto;
@@ -99,7 +99,7 @@ a:hover {
 	
 	#not_signed_in {
 		float: right;
-		padding: 20px 0 10px 20px;
+		padding: 15px 0 10px 20px;
 		position: relative;
 	}
 		.topnav {
@@ -126,54 +126,29 @@ a:hover {
 	
 	#userbox {
 		float: right;
-		padding: 7px 0;
+		padding: 12px 0;
 	}
-		#user {
-			float: left;
-			padding: 10px 0 0 0;
+		#userbox .username:hover, #userbox .aspect a:hover {
+			opacity: 0.7;
 		}
-			#user:hover {
-				opacity: 0.7;
-			}
-			#user img {
-				height: 40px;
-			}
-			#user .name {
-				float: left;
-				margin: 10px 10px 0 10px;
-				padding: 0;
-				max-width: 120px;
-			}
-			#user a {
-				font-size: 10pt;
-				font-weight: bold;
-				color: #666666;
-			}
-			#user a:hover {
-				text-decoration: none;
-			}
-
-		#user-links {
-			background: #FAFAFA;
-			background: -moz-linear-gradient(#FAFAFA, #E0E0E0);
-			background: -webkit-linear-gradient(#FAFAFA, #E0E0E0);
-			background: linear-gradient(#FAFAFA, #E0E0E0);
+		#userbox img {
+			height: 40px;
+		}
+		#userbox .name {
 			float: left;
-			margin: 2px 0 0 20px;
 			padding: 0;
-			border: 1px solid #DDD;
-			border-radius: 3px;
-			box-shadow: 0 1px 0 #FAFAFA, inset 0 1px 0 #FAFAFA;
-			list-style: none;
 		}
-			#user-links li {
-				position: relative;
-				float: left;
-				padding: 10px 10px 0 10px;
-			}
-			#user-links img {
-				height: 35px;
-			}
+		#userbox a {
+			font-size: 10pt;
+			font-weight: bold;
+			color: #666666;
+		}
+		#userbox a:hover {
+			text-decoration: none;
+		}
+		#userbox .aspect {
+			line-height: 10pt;
+		}
 
 
 #site {
@@ -191,9 +166,18 @@ a:hover {
 		}
 	
 	#content {
+		clear:both;
 		float: left;
 		margin: 40px 0;
 	}
+		.tabs img {
+			height: 35px;
+		}
+
+		.fork {
+			height: 15px;
+			padding-top:2px;
+		}
 
 #footer {
 	color: #636363;

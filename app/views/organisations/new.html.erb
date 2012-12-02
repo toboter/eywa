@@ -1,0 +1,12 @@
+<% title "New Organisation" %>
+<%= form_for @organisation, :url => organisations_path do |f| %>
+  <%= f.error_messages %>
+
+    <p>
+      <%= f.label :username, 'Organisation name' %><br />
+      <%= f.text_field :username %>
+    </p>
+    <p><%= f.submit (@organisation.new_record? ? "Create" : "Update") %></p>
+
+<% end %>
+<p><%= link_to "Back to List", root_path %></p>

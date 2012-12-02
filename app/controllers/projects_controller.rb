@@ -2,42 +2,54 @@ class ProjectsController < ApplicationController
   before_filter :login_required
   
   def index
-    @projects = Project.all
+    @owner = Account.find(params[:account_id])
+    @projects = @owner.own_projects.all
   end
 
   def show
-    @project = Project.find(params[:id])
+    @owner = Account.find(params[:account_id])
+    @project = @owner.own_projects.find(params[:id])
+    render :layout => 'project'
   end
 
   def new
-    @project = Project.new
+    @owner = Account.find(params[:account_id])
+    @project = @owner.own_projects.build
+    @possible_members = Account.available_as_member(@project.accounts.map(&:id), @project.owner)
+    render :layout => 'project'
   end
 
   def create
-    @project = Project.new(params[:project])
+    @owner = Account.find(params[:account_id])
+    @project = @owner.own_projects.build(params[:project])
     if @project.save
-      redirect_to @project, :notice => "Successfully created project."
+      redirect_to account_project_url(@owner, @project), :notice => "Successfully created project."
     else
       render :action => 'new'
     end
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @owner = Account.find(params[:account_id])
+    @project = @owner.own_projects.find(params[:id])
+    @possible_members = Account.available_as_member(@project.accounts.map(&:id), @project.owner)
+    render :layout => 'project'
   end
 
   def update
-    @project = Project.find(params[:id])
+    @owner = Account.find(params[:account_id])
+    @project = @owner.own_projects.find(params[:id])
     if @project.update_attributes(params[:project])
-      redirect_to @project, :notice  => "Successfully updated project."
+      redirect_to account_project_url(@owner, @project), :notice  => "Successfully updated project."
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @project = Project.find(params[:id])
+    @owner = Account.find(params[:account_id])
+    @project = @owner.own_projects.find(params[:id])
     @project.destroy
-    redirect_to projects_url, :notice => "Successfully destroyed project."
+    redirect_to account_url(@owner), :notice => "Successfully destroyed project."
   end
 end

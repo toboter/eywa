@@ -1,0 +1,14 @@
+<% title "#{@project.name}" %>
+
+<% content_for :content do %>
+  <div id="project">
+    <div class="col1">
+      <%= yield %>
+    </div>
+    <div class="col2">
+      <%= yield(:col2) %>
+    </div>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

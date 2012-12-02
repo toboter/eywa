@@ -1,6 +1,24 @@
 <% title 'Dashboard' %>
 
 <% if logged_in? %>
-  <p><%= link_to 'Your Profile', user_path(current_user) %></p>
+
+<%= session.inspect %>
+
+<h4>Projects</h4>
+<% for project in @projects %>
+  <p><%= link_to "#{project.owner.username} / #{project.name}", account_project_path(project.owner, project) %><p>
 <% end %>
-<p><%= link_to 'Projects', projects_path %></p>
+<p><%= link_to 'Your Profile', account_path(current_user) %></p>
+<% end %>
+
+<h4>Users</h4>
+<% for user in @users %>
+  <p><%= link_to "#{user.username}", account_path(user) %> | 
+  	<%= link_to "Delete", account_path(user), :confirm => 'Are you sure?', :method => :delete %><p>
+<% end %>
+
+<h4>Organisations</h4>
+<% for organisation in @organisations %>
+  <p><%= link_to "#{organisation.username}", account_path(organisation) %> | 
+  	<%= link_to "Delete", account_path(organisation), :confirm => 'Are you sure?', :method => :delete %><p>
+<% end %>

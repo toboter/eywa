@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      <%= content_for?(:title) ? yield(:title) : "Untitled" %> - Eywa, documentation and collaboration for archaeologists
+      <%= content_for?(:title) ? yield(:title) : "Untitled" %>
     </title>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
@@ -21,17 +21,50 @@
               <%= search_field_tag :search, '', :size => 40 %>
               <%= image_submit_tag(("search_button.png"), :class => "search_button") %>
             </div>
+
             <div id="userbox">
-              <div id="user">
-                <div class="name"><%= link_to "#{current_user.fullname}", user_path(current_user) %></div>
-                <%= link_to image_tag(avatar_url(current_user, 40)), user_path(current_user) %>
-              </div>
-              <ul id="user-links">
-                <li><%= link_to image_tag("add_project.png", :alt => "Add Project"), new_project_path %></li>
-                <li><%= link_to image_tag("edit_settings.png", :alt => "Edit Settings"), edit_user_path(current_user) %></li>
-                <li><%= link_to image_tag("log_out.png", :alt => "Log out"), logout_path %></li>
-              </ul>
+                <div class="name">
+                  <div class="username">
+                    <% if current_user.fullname.present? %>
+                      <%= link_to "#{current_user.fullname}", account_path(current_user) %>
+                    <% else %>
+                      <%= link_to "#{current_user.username}", account_path(current_user) %>
+                    <% end %>
+                  </div>
+                  <% if aspect? %>
+                    <div class="aspect">
+                      <%= link_to "#{current_organisation.username}", account_path(current_organisation) %>
+                      <%= link_to "(leave)", switch_back_path %>
+                    </div>
+                  <% end %>
+                </div>
+                <div id="dropdown">
+                  <ul>                  
+                    <li class="has-sub">
+                      <%= link_to image_tag(avatar_url(current_user, 40)), account_path(current_user) %>
+                      <ul>
+                        <li><%= link_to 'Your Profile', account_path(current_user) %></li>
+                        <li><%= link_to 'Settings',  edit_current_user_path %></li>
+                        <li><%= link_to 'New project', new_account_project_path(current_user) %></li>
+                        <li class="has-sub"> 
+                          <%= link_to 'Change aspect' %>
+                          <ul>
+                            <% for fellowship in current_user.fellowships.where(:role == 'admin') %>
+                            <% unless current_organisation == fellowship.organisation %>
+                              <li><%= link_to "#{fellowship.organisation.username}", sessions_path(:organisation_id => fellowship.organisation.id), :method => :post %></li>
+                            <% else %>
+                              <%= link_to "Switch back", switch_back_path %>
+                            <% end %>
+                            <% end %>
+                          </ul>
+                        </li>
+                        <li><%= link_to 'Logout', logout_path %></li>
+                      </ul>                
+                    </li>
+                  </ul>
+                </div>
             </div>
+
           <% else %>
             <div id="not_signed_in">
               <ul class="topnav">
@@ -60,7 +93,8 @@
       <div id="footer">
         <div class="upper-footer">
           <div class="container">
-            <p>Hier kommen von der Blog und Hilfeseite freigegebene Beiträge hin. In Kategorien. Max 7 pro Kategorie, max 3 Kategorien und Standartlinks</p>
+            <p>Hier kommen von der Blog und Hilfeseite freigegebene Beiträge hin. In Kategorien. Max 7 pro Kategorie, max 3 Kategorien und Standardlinks</p>
+            <p><%= params %></p>
           </div>
         </div>
         <div class="lower-footer">

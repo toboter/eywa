@@ -1,4 +1,4 @@
-<%= nested_form_for @project do |f| %>
+<%= nested_form_for [@owner, @project] do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :name %><br />
@@ -8,18 +8,25 @@
     <%= f.label :shortcut %><br />
     <%= f.text_field :shortcut %>
   </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
 
-  <h4>Add members</h4>
-  <%= f.fields_for :memberships do |builder| %>
-    <%= render "membership_fields", :f => builder %>
+  <% unless @project.new_record? %>
+    <h4>Add members</h4>
+    <%= f.fields_for :memberships do |builder| %>
+      <%= render "membership_fields", :f => builder %>
+    <% end %>
+    <p><%= f.link_to_add "Add a Member", :memberships %></p>
   <% end %>
-  <p><%= f.link_to_add "Add a Member", :memberships %></p>
-
-  <h4>Add definitions</h4>
-  <%= f.fields_for :definitions do |builder| %>
-    <%= render "definition_fields", :f => builder %>
-  <% end %>
-  <p><%= f.link_to_add "Add a Definition", :definitions %></p>
-
+  
   <p><%= f.submit %></p>
+<% end %>
+
+<% unless @project.new_record? %>
+  <% content_for :col2 do %>
+    <h4><%= link_to 'Definitions', account_project_definitions_path(@project.owner, @project) %></h4>
+
+  <% end %>
 <% end %>

@@ -4,7 +4,7 @@
   <%= f.error_messages %>
   <div id="edit">
     <div id="profile">
-	  <p>
+	    <p>
         <%= f.label :fullname %><br />
         <%= f.text_field :fullname %>
       </p>
@@ -47,11 +47,16 @@
 
     <div id="emails">
       <p>
-    	<%= f.label :email, "Email Address" %><br />
-    	<%= f.text_field :email %>
-  	  </p>
-  	  <p>Add another email address</p>
+    	   <%= f.label :email, "Email Address" %><br />
+    	   <%= f.text_field :email %>
+  	   </p>
+  	   <p>Add another email address</p>
   	</div>
+
+    <div id="organisation">
+      <p>Turn @user.username into an organisation <br />
+      or create a <%= link_to 'new organisation', new_organisation_path %></p>
+    </div>
   	
     <p><%= f.submit (@user.new_record? ? "Sign up" : "Update") %></p>
   </div>
