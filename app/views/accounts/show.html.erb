@@ -35,7 +35,7 @@
         <div class="project-entry">
           <p class="link">
             <%= link_to "#{membership.project.owner.username}", account_path(membership.project.owner) %> / 
-          <%= link_to "#{membership.project.name}", account_project_path(membership.project.owner, membership.  project) %> <span class="role-name">(<%= membership.role.name %>)</span>
+          <%= link_to "#{membership.project.name}", account_project_path(membership.project.owner, membership.  project) %> <span class="role-name">(<%= membership.role %>)</span>
           </p>
         </div>
       <% end %>

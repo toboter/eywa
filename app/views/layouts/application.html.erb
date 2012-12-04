@@ -34,7 +34,7 @@
                   <% if aspect? %>
                     <div class="aspect">
                       <%= link_to "#{current_organisation.username}", account_path(current_organisation) %>
-                      <%= link_to "(leave)", switch_back_path %>
+                      <%= link_to "(leave)", exit_aspect_path %>
                     </div>
                   <% end %>
                 </div>
@@ -51,9 +51,9 @@
                           <ul>
                             <% for fellowship in current_user.fellowships.where(:role == 'admin') %>
                             <% unless current_organisation == fellowship.organisation %>
-                              <li><%= link_to "#{fellowship.organisation.username}", sessions_path(:organisation_id => fellowship.organisation.id), :method => :post %></li>
+                              <li><%= link_to "#{fellowship.organisation.username}", change_aspect_path(:organisation_id => fellowship.organisation.id) %></li>
                             <% else %>
-                              <%= link_to "Switch back", switch_back_path %>
+                              <%= link_to "Switch back", exit_aspect_path %>
                             <% end %>
                             <% end %>
                           </ul>

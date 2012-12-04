@@ -1,7 +1,6 @@
 Eywa::Application.routes.draw do
 
   resources :fellowships
-  resources :roles, :path => "/admin/roles"
 
   match 'account/settings' => 'users#edit', :as => :edit_current_user
   match 'account/signup' => 'users#new', :as => :signup
@@ -13,9 +12,9 @@ Eywa::Application.routes.draw do
 
   match 'account/logout' => 'sessions#destroy', :as => :logout
   match 'account/login' => 'sessions#new', :as => :login
+  match 'aspect/exit' => 'sessions#destroy_aspect', :as => :exit_aspect
+  match 'aspect/change_to' => 'sessions#create_aspect', :as => :change_aspect
   resources :sessions
-
-  match 'organisation/leave' => 'sessions#leave', :as => :switch_back
  
   # Remove the controllername in the url
   # at http://jasoncodes.com/posts/rails-3-nested-resource-slugs

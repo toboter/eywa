@@ -3,21 +3,24 @@ class SessionsController < ApplicationController
   end
 
   def create
-    unless logged_in?
-      user = User.authenticate(params[:login], params[:password])
-      if user
-        session[:user_id] = user.id
-        redirect_to_target_or_default root_url, :notice => "Logged in successfully."
-      else
-        flash.now[:alert] = "Invalid login or password."
-        render :action => 'new'
-      end
+    user = User.authenticate(params[:login], params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect_to_target_or_default root_url, :notice => "Logged in successfully."
     else
+      flash.now[:alert] = "Invalid login or password."
+      render :action => 'new'
+    end
+  end
+
+  def create_aspect
+    if logged_in?
       organisation = Organisation.find(params[:organisation_id])
       if organisation
         session[:organisation_id] = organisation.id
         redirect_to account_url(organisation), :notice => "Changed aspect."
       else
+        flash.now[:alert] = "Something went wrong."
         redirect_to_target_or_default root_url, :notice => "Error."
       end
     end
@@ -29,8 +32,8 @@ class SessionsController < ApplicationController
     redirect_to root_url, :notice => "You have been logged out."
   end
 
-  def leave
+  def destroy_aspect
     session[:organisation_id] = nil
-    redirect_to root_url, :notice => "Switched back."
+    redirect_to root_url, :notice => "Switched to your personal account."
   end
 end

@@ -31,9 +31,10 @@
     <% for membership in @project.memberships %>
       <li>
         <%= image_tag avatar_url(membership.account, 35) %>
-        <%= link_to "#{membership.account.username}", account_path(membership.account) %> as a <%= membership.role.name %>
+        <%= link_to "#{membership.account.username}", account_path(membership.account) %> as a <%= membership.role %>
       </li>
     <% end %>
+
   </ul>
   <p>
     <strong>Owner:</strong>

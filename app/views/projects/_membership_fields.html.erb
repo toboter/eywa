@@ -1,7 +1,7 @@
 <div class="field">
   <%= f.label :account_id %> <%= f.collection_select(:account_id, @possible_members, :id, :username, {:include_blank => true}) %>
   <small><%= f.link_to_remove "Remove this member" %></small><br />
-  <%= f.label :role_id %> <%= f.collection_select(:role_id, Role.membership, :id, :name) %> 
+  <%= f.label :role %> <%= f.select(:role, Membership::ROLES) %> 
 </div>
 
 
