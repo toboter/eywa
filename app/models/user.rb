@@ -21,6 +21,10 @@ class User < Account
   def encrypt_password(pass)
     BCrypt::Engine.hash_secret(pass, password_salt)
   end
+
+  def self.possible_fellows(organisation_fellows)
+    where("id not in (?)", organisation_fellows)
+  end
   
   private
 
@@ -31,4 +35,5 @@ class User < Account
     end
   end
 end
+
 

@@ -8,6 +8,7 @@ class OrganisationsController < ApplicationController
   def create
     @organisation = Organisation.new(params[:organisation])
     if @organisation.save
+      @organisation.fellowships.create(:user_id => current_user.id, :role => 'admin')
       redirect_to account_url(@organisation), :notice => "Successfully created organisation."
     else
       render :action => 'new'

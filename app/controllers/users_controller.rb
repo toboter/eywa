@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_filter :login_required, :except => [:new, :create]
 
-
   def new
     @user = User.new
     render :layout => 'sign_in'

@@ -47,6 +47,24 @@
     <p><%= f.submit (@organisation.new_record? ? "Create" : "Update") %></p>
   </div>
 <% end %>
+<br />
+<div id="fellows">
+  <h4>Add fellows</h4>
+  <%= form_tag account_fellowships_path(@organisation), :method => 'post' do %>
+    <p>
+      <%= hidden_field_tag :organisation_id, @organisation.id %>
+      <%= text_field_tag :username %>
+      <%= select_tag :role, "<option>admin</option><option>fellow</option>".html_safe %> 
+      <%= submit_tag "Add" %>
+    </p>
+  <% end %>
+  <p><strong>Already added: </strong>
+    <% for fellow in @organisation.fellowships %>
+      <%= link_to "#{fellow.user.username}", account_path(fellow.user) %>(<%= fellow.role %>), 
+    <% end %>
+  </p>
+</div>
+<br />
 <p>
   <%= link_to "Show", account_path(@organisation) %> |
   <%= link_to "View All", root_path %>

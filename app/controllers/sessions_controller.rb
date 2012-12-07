@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :login_required, :only => [:create_aspect, :destroy_aspect]
   def new
   end
 
@@ -18,7 +19,7 @@ class SessionsController < ApplicationController
       organisation = Organisation.find(params[:organisation_id])
       if organisation
         session[:organisation_id] = organisation.id
-        redirect_to account_url(organisation), :notice => "Changed aspect."
+        redirect_to account_url(organisation), :notice => "Changed aspect to #{current_aspect.username}."
       else
         flash.now[:alert] = "Something went wrong."
         redirect_to_target_or_default root_url, :notice => "Error."

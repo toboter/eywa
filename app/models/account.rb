@@ -24,5 +24,4 @@ class Account < ActiveRecord::Base
       where('id != ?', owner)
     end
   end
-
 end

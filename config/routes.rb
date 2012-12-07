@@ -1,7 +1,5 @@
 Eywa::Application.routes.draw do
 
-  resources :fellowships
-
   match 'account/settings' => 'users#edit', :as => :edit_current_user
   match 'account/signup' => 'users#new', :as => :signup
   resources :users, :only => [:create, :update]
@@ -20,6 +18,7 @@ Eywa::Application.routes.draw do
   # at http://jasoncodes.com/posts/rails-3-nested-resource-slugs
   resources :accounts, :only => [:show, :destroy], :path => ''
   resources :accounts, :path => '', :only => [] do 
+    resources :fellowships
     resources :projects, :path => '', :except => [:index] do    
       resources :definitions # , :contexts, :articles, :wikis , :clones(forks?)
     end

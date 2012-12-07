@@ -2,11 +2,13 @@
 
 <% if logged_in? %>
 
-<%= session.inspect %>
+<%= session.inspect %><br />
+<%= current_user.username %>
 
 <h4>Projects</h4>
 <% for project in @projects %>
-  <p><%= link_to "#{project.owner.username} / #{project.name}", account_project_path(project.owner, project) %><p>
+  <p><%= link_to "#{project.owner.username} / #{project.name}", account_project_path(project.owner, project) %>
+  	<%= link_to "Delete", account_project_path(project.owner, project), :confirm => 'Are you sure?', :method => :delete %><p>
 <% end %>
 <p><%= link_to 'Your Profile', account_path(current_user) %></p>
 <% end %>

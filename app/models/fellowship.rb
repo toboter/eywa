@@ -8,4 +8,7 @@ class Fellowship < ActiveRecord::Base
   ROLES = %w[admin fellow]
   
   validates_presence_of :user_id, :organisation_id, :role
+
+  scope :admin, where(:role == 'admin')
+
 end

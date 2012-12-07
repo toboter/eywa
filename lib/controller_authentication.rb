@@ -17,15 +17,15 @@
 #   before_filter :login_required, :except => [:index, :show]
 module ControllerAuthentication
   def self.included(controller)
-    controller.send :helper_method, :current_user, :current_organisation, :logged_in?, :aspect?, :redirect_to_target_or_default
+    controller.send :helper_method, :current_user, :current_aspect, :logged_in?, :aspect?, :redirect_to_target_or_default
   end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def current_organisation
-    @current_organisation ||= Organisation.find(session[:organisation_id]) if session[:organisation_id]
+  def current_aspect
+    @current_aspect ||= Organisation.find(session[:organisation_id]) if session[:organisation_id]
   end
 
   def logged_in?
@@ -33,7 +33,7 @@ module ControllerAuthentication
   end
 
   def aspect?
-    current_organisation
+    current_aspect
   end
 
   def login_required

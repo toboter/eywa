@@ -33,8 +33,8 @@
                   </div>
                   <% if aspect? %>
                     <div class="aspect">
-                      <%= link_to "#{current_organisation.username}", account_path(current_organisation) %>
-                      <%= link_to "(leave)", exit_aspect_path %>
+                      <%= link_to "#{current_aspect.username}", account_path(current_aspect) %>
+                      <%= link_to "(exit)", exit_aspect_path %>
                     </div>
                   <% end %>
                 </div>
@@ -49,11 +49,11 @@
                         <li class="has-sub"> 
                           <%= link_to 'Change aspect' %>
                           <ul>
-                            <% for fellowship in current_user.fellowships.where(:role == 'admin') %>
-                            <% unless current_organisation == fellowship.organisation %>
+                            <% for fellowship in current_user.fellowships.admin %>
+                            <% unless current_aspect == fellowship.organisation %>
                               <li><%= link_to "#{fellowship.organisation.username}", change_aspect_path(:organisation_id => fellowship.organisation.id) %></li>
                             <% else %>
-                              <%= link_to "Switch back", exit_aspect_path %>
+                              <%= link_to "Exit aspect", exit_aspect_path %>
                             <% end %>
                             <% end %>
                           </ul>
