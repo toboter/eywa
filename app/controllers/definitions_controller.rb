@@ -1,5 +1,5 @@
 class DefinitionsController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required, :except => [:index, :show]
 
   def index
     @project = Project.find(params[:project_id])
@@ -22,16 +22,15 @@ class DefinitionsController < ApplicationController
 
     @family_of_thing = @project.definitions.possible_parents('Thing', nil)
     @family_of_property = @project.definitions.possible_parents('topObjectProperty', nil)
-
-    # any targets?
+    authorized_to_layout(@project)
   end
 
   def create
   	@owner = Account.find(params[:account_id])
     @project = @owner.own_projects.find(params[:project_id])
     @definition = @project.definitions.build(params[:definition])
-
-    if @definition.save
+    
+    if authorized?(@definition.project) && @definition.save
       redirect_to account_project_definition_url(@owner, @project, @definition), :notice => "Successfully created definition."
     else
       render :action => 'new'
@@ -46,6 +45,7 @@ class DefinitionsController < ApplicationController
     @family_of_thing = @project.definitions.possible_parents('Thing', nil)
     @family_of_property = @project.definitions.possible_parents('topObjectProperty', nil)
     @upper_family = @project.definitions.possible_parents(@definition.root.name, @definition.subtree_ids)
+    authorized_to_layout(@project)
   end
 
   def update
@@ -53,7 +53,7 @@ class DefinitionsController < ApplicationController
     @project = @owner.own_projects.find(params[:project_id])
     @definition = @project.definitions.find(params[:id])
 
-    if @definition.update_attributes(params[:definition])
+    if authorized?(@definition.project) && @definition.update_attributes(params[:definition])
       redirect_to account_project_definition_url(@owner, @project, @definition), :notice  => "Successfully updated definition."
     else
       render :action => 'edit'
@@ -64,8 +64,16 @@ class DefinitionsController < ApplicationController
     @owner = Account.find(params[:account_id])
     @project = @owner.own_projects.find(params[:project_id])
     @definition = @project.definitions.find(params[:id])
-
-    @definition.destroy unless @definition.is_root?
-    redirect_to account_project_definitions_url(@owner, @project), :notice => "Successfully destroyed definition."
+    unless @definition.is_root?
+      if authorized?(@definition.project)
+        @definition.destroy 
+        redirect_to account_project_definitions_url(@owner, @project), :notice => "Successfully destroyed definition."
+      else
+        unauthorized!
+      end
+    else
+      flash[:error] = "No permission!"
+      redirect_to :back
+    end
   end
 end

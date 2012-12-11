@@ -1,18 +1,15 @@
 <div class="definition">
   <p>
-    <b>
-      <%= link_to "#{definition.definition_name}", account_project_definition_path(definition.project.owner, definition.project, definition) %>
-    </b>
-    <%= definition.metaclass %>
-
-    <small>
-      <%= link_to "Edit | ", edit_account_project_definition_path(definition.project.owner, definition.project, definition) unless definition.is_root? %>
-      <%= link_to "Delete | ", [definition.project.owner, definition.project, definition], :confirm => 'Are you sure?', :method => :delete unless definition.is_root? %>
-      <%= link_to "New subclass", new_account_project_definition_path(definition.project.owner, definition.project, :parent_id => definition) %>
-    </small>
-
-
+    <b><%= link_to "#{definition.definition_name}", account_project_definition_path(definition.project.owner, definition.project, definition) %></b> <%= definition.metaclass %>
+    <% if logged_in? && admin_for_project(definition.project) %>
+      <small>
+        <%= link_to "Edit | ", edit_account_project_definition_path(definition.project.owner, definition.project, definition) unless definition.is_root? %>
+        <%= link_to "Delete | ", account_project_definition_path(definition.project.owner, definition.project, definition), :confirm => 'Are you sure?', :method => :delete unless definition.is_root? %>
+        <%= link_to "New subclass", new_account_project_definition_path(definition.project.owner, definition.project, :parent_id => definition) %>
+      </small>
+    <% end %>
   </p>
+
   <p><%= truncate(definition.comment, :length => 100, :separator => ' ') %></p>
 
   <% for description in definition.descriptions %>

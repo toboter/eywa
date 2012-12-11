@@ -1,6 +1,27 @@
 <% title "Edit Project" %>
 
-<%= render 'form' %>
+<%= nested_form_for([@owner, @project], :url => account_project_path) do |f| %>
+  <%= f.error_messages %>
+  <%= render 'form', :f => f %>
+  <div id="add-members">
+    <h4>Add members</h4>
+    <%= f.fields_for :memberships do |builder| %>
+      <%= render "membership_fields", :f => builder %>
+    <% end %>
+    <p><%= f.link_to_add "Add a Member", :memberships %></p>
+  </div>
+  <h4>Transfer ownership</h4>
+  <p>
+    <%= f.label :owner_id, 'New Owner' %><br />
+    <%= f.collection_select(:owner_id, Account.all, :id, :username) %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+
+
+<% content_for :col2 do %>
+<h4><%= link_to 'Definitions', account_project_definitions_path(@project.owner, @project) %></h4>
+<% end %>
 
 <p>
   <%= link_to "Show", account_project_path(@project.owner, @project) %> |

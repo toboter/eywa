@@ -1,3 +1,8 @@
 <%= render @definition.parent if @definition.parent %>
 
-<%= render 'form' %>
+<%= nested_form_for([@owner, @project, @definition], :url => account_project_definitions_path) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :parent_id %>
+  <%= render 'form', :f => f %>
+  <p><%= f.submit %></p>
+<% end %>

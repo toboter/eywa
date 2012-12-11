@@ -2,15 +2,16 @@ class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :shortcut, use: :slugged
 
-  attr_accessible :name, :shortcut, :memberships_attributes, :slug, :description, :owner_id
+  attr_accessible :name, :shortcut, :memberships_attributes, :slug, 
+    :description, :owner_id, :basic, :xmlns_url, :project_url
   stampable
 
   after_create :create_definition_skeleton
 
   has_many :memberships, :dependent => :destroy
   has_many :accounts, :through => :memberships # the members without the owner?
-  has_many :definitions
-  belongs_to :owner, :class_name => "Account" # the owner
+  has_many :definitions, :dependent => :destroy
+  belongs_to :owner, :class_name => "Account", :foreign_key => "owner_id" # the owner
 
   
   validates_uniqueness_of :shortcut, :name

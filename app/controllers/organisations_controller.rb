@@ -9,6 +9,7 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.new(params[:organisation])
     if @organisation.save
       @organisation.fellowships.create(:user_id => current_user.id, :role => 'admin')
+      session[:organisation_id] = @organisation.id
       redirect_to account_url(@organisation), :notice => "Successfully created organisation."
     else
       render :action => 'new'
@@ -17,20 +18,25 @@ class OrganisationsController < ApplicationController
 
   def edit
     @organisation = Organisation.find(params[:id])
+    if account_authorized?(@organisation)
+      render 'edit'
+    else
+      unauthorized!
+    end
   end
 
   def update
     @organisation = Organisation.find(params[:id])
-    if @organisation.update_attributes(params[:organisation])
+    if account_authorized?(@organisation) && @organisation.update_attributes(params[:organisation])
       redirect_to account_url(@organisation), :notice  => "Successfully updated organisation."
     else
       render :action => 'edit'
     end
   end
 
-  def destroy
-    @organisation = Organisation.find(params[:id])
-    @organisation.destroy
-    redirect_to root_url, :notice => "Successfully destroyed organisation."
+private
+  def account_authorized?(organisation)
+    aspect? && organisation.fellowships.where("organisation_id in (?) AND role like (?)", current_aspect.id, 'admin').exists?
   end
+
 end

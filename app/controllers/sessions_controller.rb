@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
         redirect_to account_url(organisation), :notice => "Changed aspect to #{current_aspect.username}."
       else
         flash.now[:alert] = "Something went wrong."
-        redirect_to_target_or_default root_url, :notice => "Error."
+        redirect_to_target_or_default :back, :notice => "Error."
       end
     end
   end
@@ -35,6 +35,6 @@ class SessionsController < ApplicationController
 
   def destroy_aspect
     session[:organisation_id] = nil
-    redirect_to root_url, :notice => "Switched to your personal account."
+    redirect_to :back, :notice => "Switched to your personal account."
   end
 end

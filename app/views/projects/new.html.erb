@@ -1,4 +1,8 @@
 <% title "New Project" %>
-<%= render 'form' %>
+<%= nested_form_for([@owner, @project], :url => account_projects_path) do |f| %>
+  <%= f.error_messages %>
+  <%= render 'form', :f => f %>
+  <p><%= f.submit %></p>
+<% end %>
 
 <p><%= link_to "Back to your profile", account_path(current_user) %> | <%= link_to "Explore" %></p>

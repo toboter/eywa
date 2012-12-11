@@ -15,13 +15,4 @@ class Account < ActiveRecord::Base
   scope :users, where(:type => 'User')
   scope :organisations, where(:type => 'Organisation')
 
-  # Die folgende Filtermethode macht mir Schwierigkeiten, da wenn sie auf bereits bestehende Member
-  # angewendet wird, diese logischerweise auch nicht mehr angezeigt werden.
-  def self.available_as_member(members, owner)
-    if members.present?
-      where('id != ?', owner) # where('id not in (?) AND id != ?', members, owner) 
-    else
-      where('id != ?', owner)
-    end
-  end
 end

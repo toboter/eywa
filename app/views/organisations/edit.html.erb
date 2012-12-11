@@ -60,7 +60,7 @@
   <% end %>
   <p><strong>Already added: </strong>
     <% for fellow in @organisation.fellowships %>
-      <%= link_to "#{fellow.user.username}", account_path(fellow.user) %>(<%= fellow.role %>), 
+      <%= link_to "#{fellow.user.username}", account_path(fellow.user) %> (<%= fellow.role %>) <small><%= link_to 'delete', account_fellowship_path(@organisation, fellow), :confirm => 'Are you sure?', :method => :delete %></small>, 
     <% end %>
   </p>
 </div>

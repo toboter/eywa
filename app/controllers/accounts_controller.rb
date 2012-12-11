@@ -8,7 +8,18 @@ class AccountsController < ApplicationController
 
   def destroy
     @account = Account.find(params[:id])
-    @account.destroy
-    redirect_to root_url, :notice => "Successfully deleted account."
+    if @account.type == 'User' && @account == current_user or @account.type == 'Organisation' && aspect? && current_aspect == @account
+      if @account.own_projects.empty? #transfer rights to someone
+        session[:organisation_id] = nil if @account.type == 'Organisation'
+        session[:user_id] = nil if @account.type == 'User'
+        @account.destroy
+        redirect_to root_url, :notice => "Successfully deleted account."
+      else 
+        flash[:error] = "You still have projects! Transfer their ownership or delete them first!"
+        redirect_to :back
+      end
+    else
+      unauthorized!
+    end
   end
 end

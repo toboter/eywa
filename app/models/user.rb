@@ -1,7 +1,7 @@
 class User < Account
   attr_accessible :username, :email, :password, :password_confirmation, :fullname, :public_email, :url, :institution, :location, :interests
 
-  has_many :fellowships
+  has_many :fellowships, :dependent => :destroy
   has_many :organisations, :through => :fellowships
 
   attr_accessor :password

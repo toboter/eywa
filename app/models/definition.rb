@@ -12,7 +12,7 @@ class Definition < ActiveRecord::Base
     "#{project.shortcut}:#{name}"
   end
 
-  def self.possible_parents(root, subtree)    # and any targets?
+  def self.possible_parents(root, subtree)
     possible_parents = subtree_of(roots.where('name = ?', root))
     if subtree.present?
       possible_parents = possible_parents.where("id not in (?)", subtree)

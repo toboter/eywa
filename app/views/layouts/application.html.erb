@@ -45,7 +45,8 @@
                       <ul>
                         <li><%= link_to 'Your Profile', account_path(current_user) %></li>
                         <li><%= link_to 'Settings',  edit_current_user_path %></li>
-                        <li><%= link_to 'New project', new_account_project_path(current_user) %></li>
+                        <li><%= link_to 'New user project', new_account_project_path(current_user) unless aspect? %></li>
+                        <li><%= link_to 'New org project', new_account_project_path(current_aspect) if aspect? %></li>
                         <li class="has-sub"> 
                           <%= link_to 'Change aspect' %>
                           <ul>
@@ -95,6 +96,7 @@
           <div class="container">
             <p>Hier kommen von der Blog und Hilfeseite freigegebene Beiträge hin. In Kategorien. Max 7 pro Kategorie, max 3 Kategorien und Standardlinks</p>
             <p><%= params %></p>
+            <p><%= session.inspect if session %></p>
           </div>
         </div>
         <div class="lower-footer">

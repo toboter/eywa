@@ -1,26 +1,31 @@
 <% title 'Dashboard' %>
 
-<% if logged_in? %>
-
-<%= session.inspect %><br />
-<%= current_user.username %>
-
 <h4>Projects</h4>
 <% for project in @projects %>
-  <p><%= link_to "#{project.owner.username} / #{project.name}", account_project_path(project.owner, project) %>
-  	<%= link_to "Delete", account_project_path(project.owner, project), :confirm => 'Are you sure?', :method => :delete %><p>
-<% end %>
-<p><%= link_to 'Your Profile', account_path(current_user) %></p>
+  <p>
+  	<%= link_to "#{project.owner.username} / #{project.name}", account_project_path(project.owner, project) %>
+  	<small>
+  	  <%= link_to "(delete)", account_project_path(project.owner, project), :confirm => 'Are you sure?', :method => :delete if logged_in? && admin_for_project(project) %>
+    </small>
+  <p>
 <% end %>
 
 <h4>Users</h4>
 <% for user in @users %>
-  <p><%= link_to "#{user.username}", account_path(user) %> | 
-  	<%= link_to "Delete", account_path(user), :confirm => 'Are you sure?', :method => :delete %><p>
+  <p>
+  	<%= link_to "#{user.username}", account_path(user) %>
+  	<small>
+  	  <%= link_to "(delete)", account_path(user), :confirm => 'Are you sure?', :method => :delete if logged_in? && current_user == user %>
+  	</small>
+  <p>
 <% end %>
 
 <h4>Organisations</h4>
 <% for organisation in @organisations %>
-  <p><%= link_to "#{organisation.username}", account_path(organisation) %> | 
-  	<%= link_to "Delete", account_path(organisation), :confirm => 'Are you sure?', :method => :delete %><p>
+  <p>
+  	<%= link_to "#{organisation.username}", account_path(organisation) %>
+  	<small>
+  	  <%= link_to "(delete)", account_path(organisation), :confirm => 'Are you sure?', :method => :delete if logged_in? && admin_for_organisation(organisation) %>
+    </small>
+  <p>
 <% end %>

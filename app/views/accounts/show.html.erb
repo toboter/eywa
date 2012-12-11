@@ -2,7 +2,7 @@
   <% if logged_in? && current_user == @account %>
     <%= link_to image_tag('edit.svg') + "Edit Your Profile", edit_current_user_path, :class => 'minibutton' %>
   <% end %>
-  <% if @account.type == 'Organisation' && aspect? && current_aspect == @account %>
+  <% if admin_for_organisation(@account) %>
     <%= link_to 'Edit Organisation', edit_organisation_path(@account), :class => 'minibutton' %>
   <% end %>
   <ul class="tabs">
@@ -20,8 +20,7 @@
 
     <h3>Fellows of this organisation</h3>
     <% for fellow in @account.fellowships %>
-      <p><%= link_to "#{fellow.user.username}", account_path(fellow.user) %>(<%= fellow.role %>)
-        <%= link_to 'delete', account_fellowship_path(@account, fellow), :confirm => 'Are you sure?', :method => :delete %></p>
+      <p><%= link_to "#{fellow.user.username}", account_path(fellow.user) %>(<%= fellow.role %>)</p>
     <% end %>
     <br />
 
@@ -33,24 +32,24 @@
       <p><%= link_to "#{fellow.organisation.username}", account_path(fellow.organisation) %>(<%= fellow.role %>)</p>
     <% end %>
     
+    <div id="memberships">
+      <h3>Member in projects</h3>
+      <% if @account.memberships.present? %>
+        <% for membership in @account.memberships %>
+          <div class="project-entry">
+            <p class="link">
+              <%= link_to "#{membership.project.owner.username}", account_path(membership.project.owner) %> / 
+          <%= link_to "#{membership.project.name}", account_project_path(membership.project.owner, membership.    project) %> <span class="role-name">(<%= membership.role %>)</span>
+            </p>
+          </div>
+        <% end %>
+      <% else %>
+        <p><%= @account.username %> is not a member in any project</p>
+      <% end %>
+  </div>
+
   <% end %>
 
-  <div id="memberships">
-    <h3>Member in projects</h3>
-    <% if @account.memberships.present? %>
-      <% for membership in @account.memberships %>
-        <div class="project-entry">
-          <p class="link">
-            <%= link_to "#{membership.project.owner.username}", account_path(membership.project.owner) %> / 
-          <%= link_to "#{membership.project.name}", account_project_path(membership.project.owner, membership.  project) %> <span class="role-name">(<%= membership.role %>)</span>
-          </p>
-        </div>
-      <% end %>
-    <% else %>
-      <p><%= @account.username %> is not a member in any project</p>
-    <% end %>
-  </div>
-  
   <div id="projects">
     <h3>Projects</h3>
     <% if @account.own_projects.present? %>
