@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204213344) do
+ActiveRecord::Schema.define(:version => 20121213142624) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(:version => 20121204213344) do
     t.text     "interests"
     t.string   "type"
     t.boolean  "deactivated"
+  end
+
+  create_table "contexts", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "definition_id"
+    t.integer  "version_id"
+    t.string   "name"
+    t.hstore   "properties"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "creator_id"
+    t.integer  "updater_id"
   end
 
   create_table "definitions", :force => true do |t|

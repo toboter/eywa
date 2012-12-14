@@ -20,7 +20,7 @@ Eywa::Application.routes.draw do
   resources :accounts, :path => '', :only => [] do 
     resources :fellowships
     resources :projects, :path => '', :except => [:index] do    
-      resources :definitions # , :contexts, :articles, :wikis , :clones(forks?)
+      resources :definitions, :contexts #, :articles, :wikis , :clones(forks?)
     end
   end
 

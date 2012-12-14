@@ -3,16 +3,13 @@ class DefinitionsController < ApplicationController
 
   def index
     @project = Project.find(params[:project_id])
-    @arr_definitions = @project.definitions
-                      .arrange(:order => :name)
+    @arr_definitions = @project.definitions.arrange(:order => :name)
   end
   
   def show
     @project = Project.find(params[:project_id])
     @definition = @project.definitions.find(params[:id])
-    @arr_definition = @definition
-                      .subtree
-                      .arrange(:order => :name) # die 2 Zugriffe hier sind nicht sonderlich günstig!
+    @arr_definition = @definition.subtree.arrange(:order => :name)
   end
 
   def new

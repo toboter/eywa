@@ -1,0 +1,25 @@
+<% title "Edit Context" %>
+
+<%= form_for [@owner, @project, @context], :url => account_project_context_path do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :definition_id %><br />
+    <%= f.collection_select(:definition_id, Definition.where('project_id = ?', @project.id), :id, :name) %>
+  </p>
+  <p>
+    <%= f.label :version_id %><br />
+    <%= f.number_field :version_id %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p><%= f.submit %></p>
+<% end %>
+
+<p>
+  <%= link_to "Show", account_project_context_path(@context.project.owner, @context.project, @context) %> |
+  <%= link_to "View All", account_project_contexts_path(@project.owner, @project) %>
+</p>

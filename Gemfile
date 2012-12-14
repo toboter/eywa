@@ -7,6 +7,7 @@ gem 'rails', '3.2.8'
 
 # The Postgresql adapter
 gem 'pg'
+gem 'activerecord-postgres-hstore', git: 'git://github.com/engageis/activerecord-postgres-hstore.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -41,6 +42,10 @@ gem 'ancestry'
 
 # https://github.com/norman/friendly_id
 gem 'friendly_id'
+
+# http://railscasts.com/episodes/346-wizard-forms-with-wicked
+# https://github.com/schneems/wicked
+gem 'wicked'
 
 # Um die RDF Property und Class Werte zu erhalten werden die Seiten geladen (vielleicht mit Prefixauswahloption?)
 # http://railscasts.com/episodes/190-screen-scraping-with-nokogiri

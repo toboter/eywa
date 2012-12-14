@@ -11,6 +11,7 @@ class Project < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :accounts, :through => :memberships # the members without the owner?
   has_many :definitions, :dependent => :destroy
+  has_many :contexts, :dependent => :destroy
   belongs_to :owner, :class_name => "Account", :foreign_key => "owner_id" # the owner
 
   

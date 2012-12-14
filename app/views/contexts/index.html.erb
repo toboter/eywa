@@ -1,0 +1,24 @@
+<% title "Contexts" %>
+
+<table>
+  <tr>
+    <th>Project</th>
+    <th>Definition</th>
+    <th>Version</th>
+    <th>Name</th>
+  </tr>
+  <% for context in @contexts %>
+    <tr>
+      <td><%= context.project.shortcut %></td>
+      <td><%= context.definition.name %></td>
+      <td><%= context.version_id %></td>
+      <td><%= context.name %></td>
+      <td><%= link_to "Show", account_project_context_path(context.project.owner, context.project, context) %></td>
+      <td><%= link_to "Edit", edit_account_project_context_path(context.project.owner, context.project, context) %></td>
+      <td><%= link_to "Destroy", account_project_context_path(context.project.owner, context.project, context), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Context", new_account_project_context_path(@project.owner, @project) %></p>
+<p><%= link_to "Back to project", account_project_path(@project.owner, @project) %></p>

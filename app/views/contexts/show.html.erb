@@ -1,0 +1,28 @@
+<% title "Context" %>
+<p>
+  <small>Created by <%= @context.creator.username %></small>
+</p>
+<p>
+  <strong>Definition:</strong>
+  <%= @context.definition.name %>
+</p>
+<p>
+  <strong>Version:</strong>
+  <%= @context.version_id %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @context.name %> (conceptual! not the object name)
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @context.properties %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_account_project_context_path(@context.project.owner, @context.project, @context) %> |
+  <%= link_to "Destroy", account_project_context_path(@context.project.owner, @context.project, @context), :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", account_project_contexts_path(@context.project.owner, @context.project) %> | 
+  <%= link_to "Back to project", account_project_path(@context.project.owner, @context.project) %>
+</p>
